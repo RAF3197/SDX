@@ -1,0 +1,67 @@
+\documentclass[a4paper, 10pt]{article}
+
+\usepackage[utf8]{inputenc}
+
+\title{Reading Report: Hebert13}
+\author{\textbf{Ricard Abril}}
+\date{\normalsize\today{}}
+
+\begin{document}
+
+\maketitle
+
+
+\section{Summary}
+Aquet text, ens introdueix certes eines de Erlang mitjançant "fal·làcies", que intenten convèncer de que la computació distribuïda no funciona correctament i explica com evitar-ho mitjançant aquestes eines.
+\\Aquet es un text pensat per principiants, però si que aquets cal que tinguin certs coneixements de computació distribuïda i d'Erlang per entendre be el que explica.
+
+\paragraph{La xarxa es confiable.\\}
+\hspace{-0,55cm} Aquet punt ens explica que no podem confiar en que la xarxa sempre estigui disponible, ja que aquesta pot caure per diversos motius, tant per una fallada de hardware, per un tall de llum o altres problemes que escapen del nostre control.
+Per evitar això, en Erlang disposem de un mode de comunicació asíncron, que ens permet saber si podem arribar a un node.
+
+\paragraph{No hi ha latència.\\}
+\hspace{-0,40cm}Aquet punt tracta un error prou comú, ja que molts cops no es te en conte que en computació distribuïda, les crides son remotes, cosa que pot ocasionar certa latència en la resposta. Així que hem de tenir-ho present, i tenir en compte aquesta latència deguda al transport de la informació.
+
+\paragraph{L'ample de banda és infinit.\\}
+\hspace{-0,40cm}Un altre error comú es el de pensar que el ample de banda es infinit, en Erlang, tindrem un gran numero de nodes distribuïts, per tant si enviem grans quantitats de dades, podem ocasionar problemes, ja que la comunicació entre dos nodes es fa utilitzant TCP, de forma que si saturem la comunicació, aquesta quedarà bloquejada també per tota la resta de missatges, cosa que inclou els "heartbeats", que son els missatges que s'envien els diferents nodes per informar de que segueixen en funcionament.
+
+\newpage\paragraph{La Xarxa es segura.\\}
+\hspace{-0,40cm}Un altre error greu, es confiar en que la xarxa es segura i que tothom en ella en te bones intencions. Erlang, no implementa per defecte seguretat de cap mena, de forma que haurem de encarregar-nos de aplicar mesures de seguretat cada node, si no ho fem, qualsevol persona en la xarxa, podria interceptar els missatges i manipular-los de forma senzilla, cosa que pot ocasionar un gran problema a la nostra aplicació distribuïda.\\
+Que podem fer:\\
+\textit{- Utilitzar SSL.\\}
+\textit{- Implementar una capa de comunicació propia.\\}
+\textit{- Utilitzar tunels per crear canals segurs.}
+
+\paragraph{La topologia no canvia.\\}
+\hspace{-0,5cm}
+No podem dissenyar un sistema distribuït sense fer-nos la idea de que la topologia de la xarxa sofreix canvis constants, de forma que em de evitar hardocodejar cap hostname, adreça ip o altres elements que puguin canviar davant d'un canvi de topologia.
+
+
+\paragraph{Només hi ha un administrador.\\}
+\hspace{-0,350cm}Em de tenir present que no serem els únics que utilitzarem el nostre software, i que altres nodes, poden necessitar les nostres respostes per funcionar, de forma que hem de pensar en que en cas de fallada els diferents errors siguin senzills de debugar encara sense tenir accés a la VM.
+
+\paragraph{El cost de transport és zero.\\}
+\hspace{-0,40cm}Transportar dades no es gratuït ni en temps ni en diners, per contra del que s’acostuma a pensar. La serialitzacio de quantitats grans de dades, te un cost, que després el tindrem també en el altre extrem per tal de desserialitzarles, de forma que haurem de tindre-ho en ment. També hem de pensar que si enviem més dades, ens caldrà un millor hardware i més ample de banda, cosa que costa diners.
+
+
+\paragraph{La xarxa es homogènia.\\}
+\hspace{-0,40cm}Un altre error es el de pensar que tots els nodes utilitzen el mateix llenguatge i estructures que nosaltres, per aquet motiu hauríem de utilitzar alguna capa de traducció com XML, JSON o similar per tal de enviar i rebre les dades de la mateixa forma en tots els nodes.
+
+\paragraph{En resum:\\}\hspace{-0,55cm}
+\textit{-No podem confiar en que la xarxa estigui disponible. Erlang no te ninguna mesura per aquet fi \\}
+\textit{-Tenim que tenir en conte que podem tenir retràs en les comunicacions a l'hora de fer les nostres programes.\\}
+\textit{-El ample no es infinit, hem de evitar en la mida del que sigui possible enviar grans quantitats de dades.\\}
+\textit{-La xarxa no es segura, hem de protegir la informació que intercanviem.\\}
+\textit{-La topologia es canviant, per tant no podem fer cap suposició respecte a ella\\}
+\textit{-No tots els nodes son iguals, així que el intercanvi de dades s'ha de fer en un format comú ben documentat.}
+\section{Assessment}
+
+El text es pot llegir fàcilment, i per altra part dona una bona visió dels errors comuns al utilitzar la computació distribuïda i que hauríem de fer per evitar-los, de forma que encara que cal una mica de coneixement previ per entendre be tot allò que explica, jo si que l'inclouria el curs vinent
+
+ 
+
+
+\end{document}
+
+
+
