@@ -1,2 +1,0 @@
-# SDX
-SDX Lab
