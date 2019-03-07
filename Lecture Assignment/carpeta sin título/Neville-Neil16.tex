@@ -1,0 +1,51 @@
+\documentclass[a4paper, 10pt]{article}
+
+\usepackage[utf8]{inputenc}
+
+\title{Reading Report: Neville-Neil16}
+\author{\textbf{Ricard Abril}}
+\date{\normalsize\today{}}
+
+\begin{document}
+
+\maketitle
+
+
+\section{Summary}
+En aquet text s'introdueixen els conceptes de sincronització i sintonització, que volen dir, per quin motiu son importants ,per quins motius pot ser complicat de mantenir-ho en un sistema i com arreglar-ho.
+
+\hspace{-0,55cm}\\Sincronització: Definim la sincronització com quant prop es troben 2 rellotges, dos rellotges que donen les 12:00h exactament al mateix temps, estarien sincronitzats perfectament.
+\hspace{-0,55cm}\\Sintonització: Definim la sintonització com la qualitat de mantenir el temps d'un rellotge.
+
+\hspace{-0,55cm}\\En la primera part del article, parla precisament dels sistemes que podem utilitzar per mantenir la sintonització ¡, ja que en un sistema no podem assumir sempre que un segon es un segon. Això es degut a que el tems es deriva del nostre CPU, per la qual cosa quan aquesta treballa a una freqüència alta degut a que té moltes coses a processar el temps avançarà més ràpid des de el punt de vista del CPU, en canvi quan es doni la situació contraria, el temps podria arribar a ser negatiu. Una solució típica en els sistemes segons explica el text es la incorporació de un cristall de molt baix cost que monitoritza el sistema i executa rutines per tal de controlar que el temps no avanci massa ràpid. Per fer això necessitem una bona referencia del temps, cosa que aconseguim o comprant un cristall extern que funciona via PCI (molt car però pràctic), o injectant una senyal de 10MHz de alta qualitat des de el bus sèrie.\\
+
+
+\paragraph{What Time Is It Now?.\\}
+\hspace{-0,55cm}\\ En aquesta part del text, s'explica com obtenir el temps actual en un sistema,  en un sistema s'acostuma a tenir diversos clocks, alguns de més precisos i alguns de menys precisos. Els més precisos són més lents de consultar i per tant la resposta a la crida triga més, en canvi els menys precisos, són més ràpids de consultar, però la referencia que aporta és més inexacta.\\\\\\\\
+
+
+\paragraph{Find a Better Clock.\\}
+\hspace{-0,55cm}\\ En aquesta secció s'explica com es fa per sincronitzar el nostre sistema amb una font de referencia externa. El problema més gran que trobem, es el de trobar una font de referencia externa. Una bona solució per aquet aspecte es utilitzar la xarxa per a fer-ho.\\
+Existeix un protocol anomenat NTP (Network Time Protocol), aquet és implementat com un sistema distribuït que té clocks de diferents qualitats, per això es classifiquen de Stratum 0 fins Stratum 15, sent el 0 la màxima qualitat possible i el 15 la mínima.
+\\Després un deamon de NTP, enviarà missatges per la xarxa per tal de mantenir una sincronització adient i accelerar o relentitzar el nostre clock segons sigui oportú.
+
+\paragraph{Datacenter Time.\\}
+\hspace{-0,55cm}\\ En aquesta secció del text s'explica que a l'any 2002, es va definir un nou protocol anomenat PTP (Precision Time Protocol), i s'utilitza en datacenters, encara que aquet protocol es molt precís, se segueix necessitant sincronització. També explica que PTP, no esta dissenyat per a petits host, sinó per a grans raks que necessiten utilitzar, analitzar i dur a terme accions en temps real, com ara les maquines de High Frecuency Trading.\\
+També explica un parell de diferencies tècniques entre PTP i NTP, ara com, NTP esta pensat per ser enrutat per internet i PTP no, en PTP tenim un màster i una sèrie de esclaus en una xarxa broadcast, en NTP no, etc .., PTP també assumeix una xarxa simètrica en que tots els paquets trigaran sempre el mateix en propagar-se.\\
+Per últim també explica que PTP necessita de connexió de xarxa de banda ampla i un oscil·lador extern per GPS o una altra font estable de referencia.
+
+\paragraph{ Marching On.\\}
+\hspace{-0,55cm}\\ En questa secció explica que la sincronització a un nivell per sota dels micro segons en un gran numero de maquines es una gran victòria, però per a les futures aplicacions, necessitarem sincronització a nivell de nano segons.
+
+\section{Assessment}
+
+El text en qüestió dona una bona visió de dos aspectes que no acostumen a tenir-se massa en compte, normalment es té la sensació de que tot funciona correctament i prou, però quan els sistemes agafen certa dimensió hi ha que prendre atenció en diferents aspectes que normalment obviem, com ara la sincronització i la sintonització.
+
+
+\hspace{-0,55cm}\\Encara que al principi el text sembli feixuc, es va tornant interesant a mida que es va llegint, i aporta una sèrie de coneixements sobre el funcionament de la sincronització i sintonització en sistemes distribuïts, per el qual l'inclouria per el següent curs.
+
+
+\end{document}
+
+
+
