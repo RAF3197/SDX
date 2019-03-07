@@ -26,11 +26,8 @@ Aquesta pràctica tenia com a objectiu familiaritzar-se amb Erlang, programant l
 \newpage
 \section{Experiments}
 \begin{enumerate}
-  \item Try opening 2 or 3 clients and test that all of them receive all the messages. You should also try to communicate clients on different physical machines (remember to change the local IP by the domain name (or the IP address) of the corresponding machines). Read the ’Erlang primer’ to refresh how to contact remote nodes.
-  Per obrir un numero N de clients i un servidor, nomes haurem de inicialitzar el servidor i diversos clients amb les comandes indicades a la documentació de la practica.\\
-  En la figura següent, es pot observar el correcte funcionament del sistema.\\\\\\
+  \item Make tests with different Sleep and Work parameters to  analyze  how  this  lock  implementation  responds  to  different  contention degrees.\\
   \includegraphics[width=\textwidth]{img1}\\\\
-  Per fer-ho utilitzant diverses maquines físiques, es faria de la mateixa manera, però substituint la @IP de loopback, per el Hostname o @IP del node en qüestió.
 
 
   \newpage\item Once you have a set of servers up and running, try connect- ing some clients to each of the server instances and begin to chat. Does it work? You can also try to crash some of the servers (e.g. by sending a disconnect message from the Erlang prompt) and see what happens.
