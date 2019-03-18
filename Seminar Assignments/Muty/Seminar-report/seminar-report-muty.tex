@@ -5,7 +5,6 @@
 
 %opening
 \title{Seminar Report: Chatty}
-\author{\textbf{Carles,Ricard}}
 \date{\normalsize\today{}}
 
 \begin{document}
@@ -25,19 +24,29 @@ Aquesta pràctica tenia com a objectiu familiaritzar-se amb Erlang, programant l
 
 \newpage
 \section{Experiments}
+\paragraph[bold]{Some Testing}
 \begin{enumerate}
-  \item Make tests with different Sleep and Work parameters to  analyze  how  this  lock  implementation  responds  to  different  contention degrees.\\
-  \includegraphics[width=\textwidth]{img1}\\\\
+  \item Make tests with different Sleep and Work parameters to analyze how this lock implementation responds to different contention degrees.\\\\
+  \includegraphics[width=\textwidth]{img1}\\
 
 
-  \newpage\item Once you have a set of servers up and running, try connect- ing some clients to each of the server instances and begin to chat. Does it work? You can also try to crash some of the servers (e.g. by sending a disconnect message from the Erlang prompt) and see what happens.
-  Al connectar diversos servidors i diversos usuaris a aquets, el chat segueix funcionant perfectament, de forma que encara estan en servidors diferents, tots els clients de tots els servidors podran veure els missatges de la resta. Tal i com es pot veure en la figura següent:\\\\\\
-  \includegraphics[width=\textwidth]{img2s}\\\\
- \newpage El tenir més d'un servidor, també aporta robustes al sistema, ja que si un dels servidors cau, nomes es queden sense connexió els clients que estan connectats en aquet servidor en específic. Tal i com es pot apreciar en les figures següents:\\\\
-  \includegraphics[width=\textwidth]{img3}\\\\
-  \includegraphics[width=\textwidth]{img4}\\\\
-  
+  \newpage\item Adapt the muty module to create each worker-lock pair in a different Erlang instance (that is, john and l1 should run in a node, ringo and l2 in another, and so on). Remember how processes are created remotely, how names registered in remote nodes are referred, and how Erlang runtime should be started to run distributed programs.  
 \end{enumerate}
+
+\paragraph[bold]{Resolving deadlock}
+\begin{enumerate}
+
+\item Repeat the previous tests to compare the behavior of this lock with respect to the previous one.
+
+\end{enumerate}
+
+\paragraph[bold]{Lamport’s time}
+\begin{enumerate}
+
+\item Repeat the previous tests to compare this version with the former ones.
+
+\end{enumerate}
+
 \newpage
 \section{Open questions}
 \begin{enumerate}
