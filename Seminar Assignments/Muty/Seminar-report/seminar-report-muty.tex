@@ -24,37 +24,30 @@
 \section{Experiments}
 \paragraph[bold]{Some Testing}
 \begin{enumerate}
-  \item Make tests with different Sleep and Work parameters to analyze how this lock implementation responds to different contention degrees.
+\item Make tests with different Sleep and Work parameters to analyze how this lock implementation responds to different contention degrees.
 \paragraph[bold]{Test 1: Sleep time inferior a work time}
 \paragraph[bold]{Test 2: Sleep time superior a work time}
 \paragraph[bold]{Test 3: Sleep time i work time iguals}
-
-
-  \newpage\item Adapt the muty module to create each worker-lock pair in a different Erlang instance (that is, john and l1 should run in a node, ringo and l2 in another, and so on). Remember how processes are created remotely, how names registered in remote nodes are referred, and how Erlang runtime should be started to run distributed programs.  
+\item Adapt the muty module to create each worker-lock pair in a different Erlang instance (that is, john and l1 should run in a node, ringo and l2 in another, and so on). Remember how processes are created remotely, how names registered in remote nodes are referred, and how Erlang runtime should be started to run distributed programs.  
 \end{enumerate}
 
 \paragraph[bold]{Resolving deadlock}
 \begin{enumerate}
 \item Repeat the previous tests to compare the behavior of this lock with respect to the previous one.
-\end{enumerate}
-
 \paragraph[bold]{Test 1: Sleep time inferior a work time}
 \paragraph[bold]{Test 2: Sleep time superior a work time}
 \paragraph[bold]{Test 3: Sleep time i work time iguals}
-
+\end{enumerate}
 
 \paragraph[bold]{Lamport’s time}
 \begin{enumerate}
 \item Repeat the previous tests to compare this version with the former ones.
-\end{enumerate}
 \paragraph[bold]{Test 1: Sleep time inferior a work time}
 \paragraph[bold]{Test 2: Sleep time superior a work time}
 \paragraph[bold]{Test 3: Sleep time i work time iguals}
-
+\end{enumerate}
 
 \newpage
 \section{Open questions}
-\begin{enumerate}
-\end{enumerate}
-
 \section{Personal opinion}
+\end{document}
