@@ -20,7 +20,8 @@
 
 \section{Introduction}
 \begin{flushleft}
-
+La pràctica del Muty consisteix en implementar 3 versions diferents d'un lock d'exclusió mútua. Ens cal conèixer com funcionen l'algoritme de Ricart Agatawala i també
+com funcionen els rellotges de Lamport. L'objectiu serà coordinar l'accés de processos per tal que 2 d'aquests no puguin accedir al mateix recurs alhora.
 
 \end{flushleft}
 
@@ -122,8 +123,10 @@ no assegura que no es puguin produir deadlocks i resoldre'ls de la manera explic
 \begin{enumerate}
 \item Justify how your code guarantees that only oneprocess is in the critical section at any time.
 \begin{flushleft}
-Quan un node rep un request d'un node més prioritari, li envia OK i posteriorment envia un request al més prioritari.
-D'aquesta manera s'evita
+Per tal que 2 processos accedeixin a la regió crítica alhora, cal que rebin OK de tots el altres nodes. Si tenim
+que un node rep un request d'un node més prioritari, li envia OK i posteriorment envia un request al més prioritari.
+D'aquesta manera s'evita que 2 processos estiguin a la regió crítica al mateix temps. Aquesta request  ens garanteix un únic accés a la regió crítica.
+A més com en aquest versió es treballa amb prioritats podem dir que no es respecta el happened-before order, però sí el safetyness.
 
 \end{flushleft}
 
