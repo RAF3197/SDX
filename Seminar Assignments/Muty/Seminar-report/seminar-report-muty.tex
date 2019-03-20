@@ -19,6 +19,10 @@
 \end{center}
 
 \section{Introduction}
+\begin{flushleft}
+
+
+\end{flushleft}
 
 \newpage
 \section{Experiments}
@@ -95,21 +99,63 @@ En el cas de que el sleep time sigui més gran que el work time, els workers, no
 
 \end{enumerate}
 
+
+
+
 \newpage
 \section{Open questions}
-\paragraph[bold]{4.1 The architecture}
-\item What is the behavior of this lock when you increase the risk of a conflict?
+\paragraph[bold]{3.1 The architecture}
+\begin{enumerate}
+\item What is the behavior of the lock when you increase the risk of a conflict?
+\begin{flushleft}
+En el pitjor cas donat, que seria quan es produeix un deadlock, els locks afectats reben un missatge
+de release del worker si passat un temps no aconsegueixen el lock. En aquesta versió de lock, la seguretat
+per evitar la situació que dos locks accedeixin a la regió crítica alhora es duu a terme, però en canvi
+no assegura que no es puguin produir deadlocks i resoldre'ls de la manera explicada anteriorment.
+
+\end{flushleft}
 
 
-\paragraph[bold]{4.2 Resolving deadlock}
+\end{enumerate}
+
+\paragraph[bold]{3.2 Resolving deadlock}
+\begin{enumerate}
 \item Justify how your code guarantees that only oneprocess is in the critical section at any time.
+\begin{flushleft}
+Quan un node rep un request d'un node més prioritari, li envia OK i posteriorment envia un request al més prioritari.
+D'aquesta manera s'evita
+
+\end{flushleft}
 
 \item What is the main drawback of lock2 implementation?
+\begin{flushleft}
+El problema principal que pot donar-se es produeix pel mal repartiment del control de la regió
+crítica degut a la prioritat d'alguns nodes. Així, quan el temps de sleep time és molt petit,
+els nodes amb id petits que demanin accés tindran una prioritat superior. Això pot provocar que alguns
+nodes no aconsegueixin entrar mai a la regió crítica o que el temps que tardin els nodes menys prioritaris a accedir
+sigui molt elevat.
 
-\paragraph[bold]{4.3 Lamport's time}
+\end{flushleft}
+
+
+\end{enumerate}
+
+\paragraph[bold]{3.3 Lamport's time}
+\begin{enumerate}
 \item Note that the workers are not involved in the Lam-port’s clock.  According to this, would it be possible that a worker is givenaccess to a critical section prior to another worker that issued a request toits lock instance logically before (assuming happened-before order)?
+\begin{flushleft}
+No pot ser possible, ja que el permís d'accedir a la regió crítica ve donat depenent de la variable clock i aquesta s'incrementa
+cada vegada que el lock accedeix a la regió crítica.
 
+\end{flushleft}
+
+\end{enumerate}
 
 \newpage
 \section{Personal opinion}
+\begin{flushleft}
+El treball realitzat en aquest laboratori exemplifica de manera clara un dels mètodes de sincronització entre nodes
+facilitant l'enteniment de la seva execució i mostrant els possibles problemes comuns que solen aparèixer.
+
+\end{flushleft}
 \end{document}
