@@ -97,5 +97,19 @@ En el cas de que el sleep time sigui més gran que el work time, els workers, no
 
 \newpage
 \section{Open questions}
+\paragraph[bold]{4.1 The architecture}
+\item What is the behavior of this lock when you increase the risk of a conflict?
+
+
+\paragraph[bold]{4.2 Resolving deadlock}
+\item Justify how your code guarantees that only oneprocess is in the critical section at any time.
+
+\item What is the main drawback of lock2 implementation?
+
+\paragraph[bold]{4.3 Lamport's time}
+\item Note that the workers are not involved in the Lam-port’s clock.  According to this, would it be possible that a worker is givenaccess to a critical section prior to another worker that issued a request toits lock instance logically before (assuming happened-before order)?
+
+
+\newpage
 \section{Personal opinion}
 \end{document}
