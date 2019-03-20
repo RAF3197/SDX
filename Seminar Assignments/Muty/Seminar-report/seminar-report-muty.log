@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018) (preloaded format=pdflatex 2019.2.15)  20 MAR 2019 11:44
+This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018) (preloaded format=pdflatex 2019.2.15)  20 MAR 2019 12:32
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -231,39 +231,170 @@ Overfull \hbox (25.00003pt too wide) in paragraph at lines 42--43
 [][] 
  []
 
+
+Underfull \hbox (badness 10000) in paragraph at lines 43--44
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 43--44
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 45--46
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 45--46
+
+ []
+
 <muty-code.png, id=27, 1003.75pt x 411.5375pt>
 File: muty-code.png Graphic file (type png)
 <use muty-code.png>
-Package pdftex.def Info: muty-code.png  used on input line 44.
+Package pdftex.def Info: muty-code.png  used on input line 47.
 (pdftex.def)             Requested size: 345.0pt x 141.45311pt.
 
-Underfull \hbox (badness 10000) in paragraph at lines 43--45
+Overfull \hbox (25.00003pt too wide) in paragraph at lines 47--48
+[][] 
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 49--50
 
  []
 
 
-Overfull \hbox (25.00003pt too wide) in paragraph at lines 43--45
-[] 
+Underfull \hbox (badness 10000) in paragraph at lines 49--50
+
  []
 
-[5 <./test-4.png> <./muty-code.png>] [6] [7] (./seminar-report-muty.aux) ) 
+[5 <./test-4.png> <./muty-code.png>]
+<muty-work.png, id=33, 1418.29875pt x 903.375pt>
+File: muty-work.png Graphic file (type png)
+<use muty-work.png>
+Package pdftex.def Info: muty-work.png  used on input line 51.
+(pdftex.def)             Requested size: 345.0pt x 219.73671pt.
+
+Overfull \hbox (25.00003pt too wide) in paragraph at lines 51--52
+[][] 
+ []
+
+[6 <./muty-work.png>]
+Underfull \hbox (badness 10000) in paragraph at lines 60--61
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 60--61
+
+ []
+
+<lock-1.png, id=38, 1329.96875pt x 868.24374pt>
+File: lock-1.png Graphic file (type png)
+<use lock-1.png>
+Package pdftex.def Info: lock-1.png  used on input line 62.
+(pdftex.def)             Requested size: 345.0pt x 225.22136pt.
+
+Overfull \hbox (25.00003pt too wide) in paragraph at lines 62--63
+[][] 
+ []
+
+[7 <./lock-1.png>]
+Underfull \hbox (badness 10000) in paragraph at lines 68--69
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 68--69
+
+ []
+
+<lock-2.png, id=44, 1329.96875pt x 868.24374pt>
+File: lock-2.png Graphic file (type png)
+<use lock-2.png>
+Package pdftex.def Info: lock-2.png  used on input line 70.
+(pdftex.def)             Requested size: 345.0pt x 225.22136pt.
+
+Overfull \hbox (25.00003pt too wide) in paragraph at lines 70--72
+[][] 
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 70--72
+
+ []
+
+[8 <./lock-2.png>]
+Underfull \hbox (badness 10000) in paragraph at lines 80--82
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 80--82
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 80--82
+
+ []
+
+<lamp-1.png, id=49, 1329.96875pt x 868.24374pt>
+File: lamp-1.png Graphic file (type png)
+<use lamp-1.png>
+Package pdftex.def Info: lamp-1.png  used on input line 83.
+(pdftex.def)             Requested size: 345.0pt x 225.22136pt.
+
+Overfull \hbox (25.00003pt too wide) in paragraph at lines 83--84
+[][] 
+ []
+
+[9 <./lamp-1.png>]
+Underfull \hbox (badness 10000) in paragraph at lines 91--92
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 91--92
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 91--92
+
+ []
+
+<lamp-2.png, id=54, 1329.96875pt x 868.24374pt>
+File: lamp-2.png Graphic file (type png)
+<use lamp-2.png>
+Package pdftex.def Info: lamp-2.png  used on input line 94.
+(pdftex.def)             Requested size: 345.0pt x 225.22136pt.
+
+Overfull \hbox (25.00003pt too wide) in paragraph at lines 94--95
+[][] 
+ []
+
+[10 <./lamp-2.png>] [11] (./seminar-report-muty.aux) ) 
 Here is how much of TeX's memory you used:
- 1555 strings out of 492649
- 22516 string characters out of 6129622
+ 1581 strings out of 492649
+ 22884 string characters out of 6129622
  83843 words of memory out of 5000000
- 5435 multiletter control sequences out of 15000+600000
+ 5456 multiletter control sequences out of 15000+600000
  7588 words of font info for 27 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 41i,6n,25p,563b,201s stack positions out of 5000i,500n,10000p,200000b,80000s
-</usr
-/local/texlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/
-local/texlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/l
-ocal/texlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/loc
-al/texlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb>
-Output written on seminar-report-muty.pdf (7 pages, 963231 bytes).
+ 41i,6n,25p,563b,204s stack positions out of 5000i,500n,10000p,200000b,80000s
+</usr/local/texlive/2018/
+texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/local/texlive/2018/t
+exmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/local/texlive/2018/te
+xmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/local/texlive/2018/texm
+f-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb>
+Output written on seminar-report-muty.pdf (11 pages, 2046747 bytes).
 PDF statistics:
- 55 PDF objects out of 1000 (max. 8388607)
- 31 compressed objects within 1 object stream
+ 77 PDF objects out of 1000 (max. 8388607)
+ 39 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
- 26 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 51 words of extra memory for PDF output out of 10000 (max. 10000000)
 

@@ -41,7 +41,14 @@ En aquesta situació, a la llarga també ens podriem trobar amb deadlocks, encar
 
 \includegraphics[width=\textwidth]{test-4}
 \item Adapt the muty module to create each worker-lock pair in a different Erlang instance (that is, john and l1 should run in a node, ringo and l2 in another, and so on). Remember how processes are created remotely, how names registered in remote nodes are referred, and how Erlang runtime should be started to run distributed programs.\\\\
+
+En la imatge següent podem veure les modificacions en el fitxer muty, per a que inici els workers en diferents instàncies de erlang\\\\
+
 \includegraphics[width=\textwidth]{muty-code}
+
+Tal i com podem veure en la imatge, els diferents workers s'executen en instàncies de erlang diferents.\\\\
+
+\includegraphics[width=\textwidth]{muty-work}
 
 \end{enumerate}
 
@@ -49,16 +56,43 @@ En aquesta situació, a la llarga també ens podriem trobar amb deadlocks, encar
 \begin{enumerate}
 \item Repeat the previous tests to compare the behavior of this lock with respect to the previous one.
 \paragraph[bold]{Test 1: Sleep time inferior a work time}
+
+Per evitar els deadlocks, ara en cas de que diversos workers vulguin accedir a la regió critica del codi al mateix temps, el worker amb el ID més petit serà el que rebrà el missatge OK i podrà accedir. Amb aquet sistema evitarem els deadlocks, encara que el repartiment de feina, no serà massa equitatiu, ja que els workers amb ID més petit sempre tindran més prioritat, i per tant en cas de "empat", sempre acabaran fent la feina. Això ho podem observar en la següent imatge:\\\\
+
+\includegraphics[width=\textwidth]{lock-1}
+\newpage
+
+
 \paragraph[bold]{Test 2: Sleep time superior a work time}
-\paragraph[bold]{Test 3: Sleep time i work time iguals}
+
+En aquesta situació, al tenir un sleep time major al work time, la probabilitat de que dos workers intentin accedir a la regió critica al mateix temps es redueix, per tant el repartiment de feina serà més equitatiu, encara que dista de ser perfecte. Podem observar-ho a la següent imatge:\\\\
+
+\includegraphics[width=\textwidth]{lock-2}
+\\\\En aquet cas, ja no cal fer l'experiment per el cas de que el work time sigui igual al sleep time, ja que el resultat serà el mateix.
+
 \end{enumerate}
 
+\newpage
 \paragraph[bold]{Lamport’s time}
 \begin{enumerate}
 \item Repeat the previous tests to compare this version with the former ones.
-\paragraph[bold]{Test 1: Sleep time inferior a work time}
-\paragraph[bold]{Test 2: Sleep time superior a work time}
-\paragraph[bold]{Test 3: Sleep time i work time iguals}
+\paragraph[bold]{Test 1: Sleep time inferior a work time\\\\}
+En aquet cas, per millorar la implementació anterior, hem aplicat el algorisme de Lamport, que ens permetrà un millor repartiment de la feina.
+Això es degut a que en el moment que dos workers demanin accés a la regió critica, el que tingui el clock més petit, serà el que accedirà, no el que tingui el ID més petit. Per altra banda, en cas de que el temps de work sigui molt mes gran que el temps de sleep, els workers poden enviar missatges de release. Tal i com podem observar en la següent imatge:\\\\
+
+\includegraphics[width=\textwidth]{lamp-1}
+
+Per altra part, tal i com passa en la secció anterior, si el temps de work és més gran que el temps de withdrawal, hi haurà workers, que no seran capaços de accedir a la regió critica.
+
+\newpage
+\paragraph[bold]{Test 2: Sleep time superior a work time\\\\}
+
+
+En el cas de que el sleep time sigui més gran que el work time, els workers, no tindran problema per accedir a la regió critica, ja que com podem observar en la següent imatge el temps de lock és pràcticament 0.\\\\
+
+
+\includegraphics[width=\textwidth]{lamp-2}
+
 \end{enumerate}
 
 \newpage
