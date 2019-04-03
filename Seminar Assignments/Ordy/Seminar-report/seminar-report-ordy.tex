@@ -57,9 +57,17 @@ El cas de tenir un sleep time menor al Jitter time, no hauria de causar ninguna 
 \begin{enumerate}
 \item  Set up the total order multicast system, and repeat the previous tests.
 \paragraph[bold]{Test 1: Sleep time inferior a Jitter time\\\\}
+Ni el Sleep time ni el Jitter time, haurien de provocar cap desordre, ja que els missatges s'entregaran en ordre de mínim nSeq de la queue.\\
+El que si que notarem, es que degut al alt temps de Jitter, s'enviaran més missatges.\\\\
 \includegraphics[width=\textwidth]{ordy-total-1}
 \newpage\paragraph[bold]{Test 2: Sleep time superior a Jitter time\\\\}
+Igual que en el cas anterior, tots els processos rebran els missatges en el mateix ordre, però degut a que el Sleep time, és més alt el numero de missatges rebuts serà menor, tal i com podem veure:\\\\
 \includegraphics[width=\textwidth]{ordy-total-2}
+\\\item We have a lot of messages in the system. Derive a theoretical quantification of the number of messages needed to deliver a multicast message as a function of the number of workers and check exper- imentally that your formulation is correct\\\\
+Basic = 1 * send + n * multicast + n * deliver = 2 * n + 1.\\\\
+Total = 1 * send + n * request + n * proposal + n * agreed + n * deliver = 4 * n + 1.\\\\
+N = numero de workers.
+
 \end{enumerate}
 
 \newpage
