@@ -19,7 +19,7 @@
 \end{center}
 
 \section{Introduction}
-
+En aquesta pràctica el que volem és implementar un servei multicast que respecti diferents ordres, com FIFO, causal o total.
 
 \newpage
 \section{Experiments}
@@ -72,7 +72,27 @@ N = numero de workers.
 
 \newpage
 \section{Open questions}
+\begin{enumerate}
+\item Basic Multicast: Are the posts displayed in FIFO, causal, and totalorder?  Justify why.
+\\Cap de les opcions. En aquesta versió bàsica utilitzem la funció send-after que fa servir el Jitter per treure un temps de retard random, per tant, si tenim el cas d'un worker que té temps de resposta ( o d'enviar un altre missatge multicast) prou petit, llavors aquest segon worker enviarà abans que el primer worker, els missatges multicast.
+\item Casual Order Multicast: Are the posts displayed in FIFO, causal, and totalorder?  Justify why.
+\\El vector clock fa que hi hagi una relació happened-before entre els missatges, per tant, es respectarà l'ordre causa. FIFO també ja que 2 missatges enviats pel mateix procés s'hauran de lliurar segons ho indiqui el vector clock. Però pel contrari no es respecta l'ordre total, ja que no hi ha una relació entre missatges de diferents procesos enviats al mateix temps.
+En aquesta versió el paràmetre Jitter perd importancia a causa de l'ordre que implica els vectors clock i la cua.
+\item Total Order Multicast: Are the posts displayed in FIFO, causal, and totalorder? Justify why.
+\\L'Ordre FIFO no es compleix ja que la posició de cada missatge depèn del jitter amb que arriba als processos.
+Aquests no tenen un ordre intern dels missatges que emeten a diferència de la versió causal.
+\\L'ordre causal tampoc es compleix. No s'ha establert relació de happened-before entre missatges.
+\\L'ordre total si que es respecta perquè tots els processos reben la mateixa sequència de missatges.
+
+\end{enumerate}
+
+
+
 
 \newpage
 \section{Personal opinion}
+El lab practicat ens ha ajudat a clarificar els conceptes explicats a teoria i ha exemplificat de manera clara
+un dels protocols en més èxit que s'utilitza actualment.
+
+
 \end{document}
