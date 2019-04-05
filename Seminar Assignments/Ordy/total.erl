@@ -35,7 +35,7 @@ receive
         {AgrMsg, NewerQueue} = agreed(NewQueue),
         deliver(Master , AgrMsg),
         NewMaxAgr = seq:max(MaxAgr,Seq) ,
-        server(Master , MaxPrp , NewMaxAgr , Nodes , Cast , NewQueue , Jitter);
+        server(Master , MaxPrp , NewMaxAgr , Nodes , Cast , NewerQueue , Jitter);
     stop ->
         ok
 end.
