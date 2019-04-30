@@ -1,6 +1,7 @@
 -module(gms2).
 -export([start/1, start/2]).
 -define(timeout,1000).
+-define(arghh,100).
 
 
 
@@ -48,8 +49,11 @@ leader(Name, Master, Slaves) ->
             io:format("leader ~s: strange message ~w~n", [Name, Error])
     end.
     
-bcast(_, Msg, Nodes) ->
-    lists:foreach(fun(Node) -> Node ! Msg end, Nodes).
+bcast(Name, Msg, Nodes) ->
+    lists:foreach(fun(Node) ->
+        Node ! Msg,
+        crash(Name,Msg)end,
+        Nodes).
 
 slave(Name, Master, Leader, Slaves, Ref) ->    
     receive
@@ -85,3 +89,12 @@ election(Name, Master, Slaves) ->
             Ref = erlang:monitor(process,NewLeader),
             slave(Name,Master,NewLeader,Rest,Ref)
     end.
+
+crash(Name,Msg) -> 
+    case rand:uniform(?arghh) of 
+        ?arghh ->
+            io:format("leader ~s CRASHED: msg ~w~n",[Name,Msg]),
+            exit(no_luck);
+        _ -> 
+            ok
+        end.
