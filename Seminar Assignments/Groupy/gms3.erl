@@ -9,7 +9,7 @@ start(Name) ->
 
 init(Name, Master) ->
     {A1,A2,A3} = now(),
-    random:seed(A1, A2, A3),
+    rand:seed(A1, A2, A3),
     leader(Name, Master, [], 1).
 
 start(Name, Grp) ->
@@ -18,7 +18,7 @@ start(Name, Grp) ->
 
 init(Name, Grp, Master) ->
     {A1,A2,A3} = now(),
-    random:seed(A1, A2, A3),
+    rand:seed(A1, A2, A3),
     Self = self(),
     Grp ! {join, Self},
     receive
@@ -83,7 +83,7 @@ bcast(Name, Msg, Nodes) ->
                   Nodes).
 
 crash(Name, Msg) ->
-    case random:uniform(?arghh) of
+    case rand:uniform(?arghh) of
         ?arghh ->
             io:format("leader ~s CRASHED: msg ~w~n", [Name, Msg]),
             exit(no_luck);
