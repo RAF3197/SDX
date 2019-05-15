@@ -1,6 +1,6 @@
 -module(resolver).
 -export([start/1, stop/0]).
--define(timeout, 1000).
+-define(timeout, 2000).
 
 start(Root) ->
     register(resolver, spawn(fun()-> init(Root) end)).
@@ -10,17 +10,17 @@ stop() ->
     unregister(resolver).
 
 init(Root) ->
-    Cache = [],
-    NewCache = cache:add([], inf, {domain, Root}, Cache),
-    resolver(NewCache).
+    Empty = cache:new(),
+    
+    resolver(Empty).
 
 resolver(Cache) ->
     receive
         {request, From, Req}->
             io:format("Resolver: request from ~w to solve ~w~n", [From, Req]),
-            {Reply, NewCache} = resolve(Req, Cache),
+            {Reply, Updated} = resolve(Req, Cache),
             From ! {reply, Reply},
-            resolver(NewCache);
+            resolver(Updated);
         status ->
             io:format("Resolver: cache content: ~w~n", [Cache]),
             resolver(Cache);
@@ -50,23 +50,22 @@ resolve(Name, Cache)->
 recursive([Name|Domain], Cache) ->
     io:format("Recursive ~w: ", [Domain]),
     case resolve(Domain, Cache) of
-        {unknown, NewCache} ->
-            {unknown, NewCache};
-        {{domain, Srv}, NewCache} ->
+        {unknown, Updated} ->
+            {unknown, Updated};
+        {{domain, Srv}, Updated} ->
             Srv ! {request, self(), Name},
             io:format("Resolver: sent request to solve [~w] to ~w: ", [Name, Srv]),
             receive
                 {reply, unknown, _} ->
                     io:format("unknown ~n", []),
-                    {unknown, NewCache};
+                    {unknown, Updated};
                 {reply, Reply, TTL} ->
                     io:format("reply ~w~n", [Reply]),
-                    Now = erlang:monotonic_time(),
-                    Expire = erlang:convert_time_unit(Now, native, second) + TTL,
-                    NewerCache = cache:add([Name|Domain], Expire, Reply, NewCache),
-                    {Reply, NewerCache}
+                    Expire = time:add(time:now(), TTL),
+                    NewCache = cache:add([Name|Domain], Expire, Reply, Updated),
+                    {Reply, NewCache}
             after ?timeout ->
                 io:format("timeout~n", []),
-                {unknown, NewCache}
+                {unknown, Updated}
             end
     end.

@@ -10,17 +10,18 @@ stop() ->
     unregister(resolver).
 
 init(Root) ->
-    Cache = [],
-    NewCache = cache:add([], inf, {domain, Root}, Cache),
-    resolver(NewCache).
+    Empty = cache:new(),
+    Inf = time:inf(),
+    Cache = cache:add([], Inf, {domain, Root}, Empty),
+    resolver(Cache).
 
 resolver(Cache) ->
     receive
         {request, From, Req}->
             io:format("Resolver: request from ~w to solve ~w~n", [From, Req]),
-            {Reply, NewCache} = resolve(Req, Cache, []),
+            {Reply, Updated} = resolve(Req, Cache, []),
             From ! {reply, Reply},
-            resolver(NewCache);
+            resolver(Updated);
         status ->
             io:format("Resolver: cache content: ~w~n", [Cache]),
             resolver(Cache);
@@ -58,13 +59,9 @@ resolve(Name, Cache, Req)->
                             {unknown, Cache};
                         {reply, Replies} ->
                             {Reply, Pid, _} = lists:last(Replies),
-                            NewReplies = lists:map(fun({N, E, T}) ->
-                                FullName = lists:append(N, Name),
-                                {FullName, E, T}
-                                end, Replies),
-                            NewCache = updatecache(NewReplies, Cache),
+                            NewCache = updatecache(Replies, Cache),
                             io:format("reply ~w ~w - ", [Reply, Pid]),
-                            io:format("ALL ~w Cached ~w~n", [Replies, NewReplies]),
+                            io:format("ALL ~w~n", [Replies]),
                             {Pid, NewCache}
                     after ?timeout ->
                         io:format("timeout~n", []),
@@ -79,7 +76,6 @@ resolve(Name, Cache, Req)->
 updatecache([], Cache) ->
     Cache;
 updatecache([{Name,Entry,TTL}|Replies], Cache) ->
-    Now = erlang:monotonic_time(),
-    Expire = erlang:convert_time_unit(Now, native, second) + TTL,
+    Expire = time:add(time:now(), TTL),
     NewCache = cache:add(Name, Expire, Entry, Cache),
     updatecache(Replies, NewCache).

@@ -1,6 +1,7 @@
 -module(server).
 -export([start/0, start/2, stop/0]).
 -define(timeout, 1000).
+-define(default_TTL, 5000).
 
 start() ->
     register(server, spawn(fun()-> init() end)).
@@ -14,14 +15,14 @@ stop() ->
 
 init() ->
     io:format("Server: create root domain~n"),
-    Cache = [],
-    server([], Cache, 0, root, null).
+    Empty = cache:new(),
+    server([], Empty, 0, root, null).
 
 init(Domain, Parent) ->
     io:format("Server: create domain ~w at ~w~n", [Domain, Parent]),
     Parent ! {register, Domain, {domain, self()}},
-    Cache = [],
-    server([], Cache, 0, Domain, Parent).
+    Empty = cache:new(),
+    server([], Empty, default_TTL, Domain, Parent).
 
 server(Entries, Cache, TTL, Domain, Parent) ->
     receive
@@ -65,11 +66,11 @@ server(Entries, Cache, TTL, Domain, Parent) ->
                     end
             end;
         {register, Name, Entry} ->
-            NewEntries = entry:add(Name, Entry, Entries),
-            server(NewEntries, Cache, TTL, Domain, Parent);
+            Updated = entry:add(Name, Entry, Entries),
+            server(Updated, Cache, TTL, Domain, Parent);
         {deregister, Name} ->
-            NewEntries = entry:remove(Name, Entries),
-            server(NewEntries, Cache, TTL, Domain, Parent);
+            Updated = entry:remove(Name, Entries),
+            server(Updated, Cache, TTL, Domain, Parent);
         {ttl, Sec} ->
             server(Entries, Cache, Sec, Domain, Parent);
         status ->
@@ -136,7 +137,6 @@ resolve(Subdomain, Curr, Pid, Cache, Req) ->
 updatecache([], Cache) ->
     Cache;
 updatecache([{Name,Entry,TTL}|Replies], Cache) ->
-    Now = erlang:monotonic_time(),
-    Expire = erlang:convert_time_unit(Now, native, second) + TTL,
+    Expire = time:add(time:now(), TTL),
     NewCache = cache:add(Name, Expire, Entry, Cache),
     updatecache(Replies, NewCache).
