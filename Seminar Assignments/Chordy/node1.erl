@@ -78,13 +78,10 @@ stabilize(Pred, MyKey, Successor) ->
       {Xkey, Xpid} ->
             case key:between(Xkey, MyKey, Skey) of
                 true ->
-                    %% TODO: ADD SOME CODE 
-                    %% TODO: ADD SOME CODE
                     self() ! stabilize,
                     Pred;
                     
                 false ->
-                    %% TODO: ADD SOME CODE
                     Spid ! {notify,{MyKey,self()}},
                     Successor
             end
