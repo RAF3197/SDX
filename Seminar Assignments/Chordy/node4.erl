@@ -135,17 +135,19 @@ notify({Nkey, Npid}, MyKey, Predecessor, Store) ->
             end
     end.
 
-create_probe(MyKey, {_, _, Spid}, Replica) ->
-    Spid ! {probe, MyKey, [MyKey], erlang:now()},
-    io:format("Create probe ~w! Replica: ~w~n", [MyKey, Replica]).
-
+create_probe(MyKey, {_, Spid}) ->
+    Spid ! {probe, MyKey, [MyKey], erlang:monotonic_time()},
+    io:format("Create probe ~w!~n", [MyKey]).
+	
 remove_probe(MyKey, Nodes, T) ->
-    Time = timer:now_diff(erlang:now(), T) div 1000,
+    T2 = erlang:monotonic_time(),
+    Time = erlang:convert_time_unit(T2-T, native, millisecond),
     io:format("Received probe ~w in ~w ms Ring: ~w~n", [MyKey, Time, Nodes]).
-
-forward_probe(RefKey, Nodes, T, {_, _, Spid}, Replica) ->
+	
+forward_probe(RefKey, Nodes, T, {_, Spid}) ->
     Spid ! {probe, RefKey, Nodes, T},
-    io:format("Forward probe ~w! Replica: ~w~n", [RefKey, Replica]).
+    io:format("Forward probe ~w!~n", [RefKey]).
+
 
 add(Key, Value, Qref, Client, MyKey, {Pkey, _, _}, {_, _, Spid}, Store) ->
     case key:between(Key, Pkey, MyKey) of
